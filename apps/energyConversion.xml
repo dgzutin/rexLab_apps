@@ -20,6 +20,7 @@
 
                         var jqxhr = $.ajax("http://exp05.cti.ac.at/rexLab_apps/proxy.php")
                           .done(function(){
+                           var webcam_canvas = document.getElementById("webcam");
                            webcam_canvas.src = "http://www.rexlab.net/experimentos/images/conversao.jpg";
                           });
                     });
