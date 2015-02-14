@@ -17,7 +17,11 @@
                     .click(function( event ) {
                         var webcam_canvas = document.getElementById("webcam");
                         webcam_canvas.src = "http://exp1:1234@rexlab.ararangua.ufsc.br:8105/mjpg/video.mjpg";
-                        $.post("http://exp05.cti.ac.at/rexLab_apps/proxy.php");
+
+                        var jqxhr = $.ajax("http://exp05.cti.ac.at/rexLab_apps/proxy.php")
+                          .done(function(){
+                           webcam_canvas.src = "http://www.rexlab.net/experimentos/images/conversao.jpg";
+                          });
                     });
         });
     </script>
