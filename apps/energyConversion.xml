@@ -4,31 +4,55 @@
     <Content type="html">
         <![CDATA[
 
-    <title>jQuery UI Button - Default functionality</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script>
+    <title>RexLab - Energy conversion Lab</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
 
-        $(function() {
-            $( "input[type=submit], a, button" )
-                    .button()
-                    .click(function( event ) {
-                        var webcam_canvas = document.getElementById("webcam");
-                        webcam_canvas.src = "http://exp1:1234@rexlab.ararangua.ufsc.br:8105/mjpg/video.mjpg";
+    $(function() {
+        $( "input[type=submit], a, button" )
+                .button()
+                .click(function( event ) {
+                    var webcam_canvas = document.getElementById("webcam");
+                    webcam_canvas.src = "http://exp1:1234@rexlab.ararangua.ufsc.br:8105/mjpg/video.mjpg";
 
-                        var jqxhr = $.ajax("http://exp05.cti.ac.at/rexLab_apps/proxy.php")
-                          .done(function(){
-                           var webcam_canvas = document.getElementById("webcam");
-                           webcam_canvas.src = "http://www.rexlab.net/experimentos/images/conversao.jpg";
-                          });
-                    });
-        });
-    </script>
-<image src="http://www.rexlab.net/experimentos/images/conversao.jpg" width="320" height="240" id="webcam" />
-<br>
-<input type="submit" value="Start Experiment!">
+                    count = 40;
+                    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+
+                    var jqxhr = $.ajax("../proxy.php")
+                            .always(function(){
+                                var webcam_canvas = document.getElementById("webcam");
+                                webcam_canvas.src = "http://www.rexlab.net/experimentos/images/conversao.jpg";
+                                clearInterval(counter);
+                                document.getElementById("start").value = "Start Experiment!";
+                            });
+                });
+    });
+
+    var count=40;
+    function timer()
+    {
+        count=count-1;
+        if (count <= 0)
+        {
+            clearInterval(counter);
+            //counter ended, do something here
+            return;
+        }
+
+        //document.getElementById("timer").innerHTML = count + " secs";
+        document.getElementById("start").value = count + " seconds remaining... ";
+    }
+
+</script>
+<a href="http://www.rexlab.net/" target="_blank"><img src="../images/rexlab.png" /></a>
+<img src="http://www.rexlab.net/experimentos/images/conversao.jpg" width="320" height="240" id="webcam" align="middle" />
+<br> <br>
+<input type="submit" value="Start Experiment!" id="start">
+
 
      ]]>
     </Content>

@@ -8,5 +8,5 @@
 ini_set('display_errors', 0);
 
 $lab = $_GET["lab"];
-
 file_get_contents("http://www.rexlab.net/experimentos/conversao/mswConversao.php");
+//sleep(30);
